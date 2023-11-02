@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
-import fmtransmit
+#import fmtransmit
 import wifitransmit
 
 interface = tk.Tk()
@@ -149,7 +149,6 @@ def end_transmission():
 # stopSDRButton.pack()
 
 # if SIGNAL_CHOSEN == "Wi-Fi":
-sendSDRButton = Button(interface, text="Send to SDR",bg='white', command=lambda:start_transmission())
 sendSDRButton.pack()
 
 stopSDRButton = Button(interface, text="STOP sending",bg='white', command=lambda:end_transmission())
