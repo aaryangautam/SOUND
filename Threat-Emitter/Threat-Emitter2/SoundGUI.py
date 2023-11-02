@@ -113,14 +113,18 @@ delayOption.pack()
 
 
 def start_transmission():
-    wifitransmit.wifitransmit()
-    print("sending wifi right now:::")
+    counter = 0
+    while counter <10:
+        wifitransmit.wifitransmit()
+        print("sending Wi-Fi right now:::")
+        counter+=1
 
-sendSDRButton = Button(interface, text="Send to SDR",bg='white', command=start_transmission())
+sendSDRButton = Button(interface, text="Send to SDR",bg='white', command=lambda:start_transmission())
 sendSDRButton.pack()
 
-sendSDRButton = Button(interface, text="STOP sending",bg='white', command=start_transmission())
-sendSDRButton.pack
+# sendSDRButton = Button(interface, text="STOP sending",bg='white', command=lambda:start_transmission())
+# sendSDRButton.pack()
+
 # if SIGNAL_CHOSEN == "Wi-Fi":
 #     sendSDRButton = Button(interface, text="Send to SDR",bg='white', command=start_transmission())
 #     sendSDRButton.pack()
