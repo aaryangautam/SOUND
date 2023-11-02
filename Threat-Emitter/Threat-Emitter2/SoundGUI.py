@@ -112,19 +112,39 @@ delayOption = Checkbutton(interface, text="Time Delayed Transmission",bg='white'
 delayOption.pack()
 
 
-def start_transmission():
-    counter = 0
-    while counter <10:
+#======================WIFI transimision
+running = True
+
+# Define a function to print the text in a loop
+def wifi_transmit():
+    if running:
         wifitransmit.wifitransmit()
         print("sending Wi-Fi right now:::")
-        counter+=1
+        
+    interface.after(1000, wifi_transmit)
+
+
+# Define a function to start the loop
+def start_transmission():
+   global running
+   running = True
+   wifi_transmit()
+
+# Define a function to stop the loop
+def end_transmission():
+   global running
+   running = False
+   wifi_transmit()
+
 
 sendSDRButton = Button(interface, text="Send to SDR",bg='white', command=lambda:start_transmission())
 sendSDRButton.pack()
 
-# sendSDRButton = Button(interface, text="STOP sending",bg='white', command=lambda:start_transmission())
-# sendSDRButton.pack()
+stopSDRButton = Button(interface, text="STOP sending",bg='white', command=lambda:end_transmission())
+stopSDRButton.pack()
 
+
+#interface.after(1000, wifi_transmit)
 # if SIGNAL_CHOSEN == "Wi-Fi":
 #     sendSDRButton = Button(interface, text="Send to SDR",bg='white', command=start_transmission())
 #     sendSDRButton.pack()
