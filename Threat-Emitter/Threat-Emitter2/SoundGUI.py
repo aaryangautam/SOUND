@@ -76,7 +76,9 @@ isDelay = tk.BooleanVar()
 SIGNAL_CHOSEN = "FM/AM"
 
 def change_signal(signal):
+    global SIGNAL_CHOSEN
     SIGNAL_CHOSEN = signal
+    print(SIGNAL_CHOSEN)
     menuButton.config(text=f"Choosen signal: {SIGNAL_CHOSEN}")
     
 # Dropdown menu options 
@@ -126,9 +128,12 @@ def wifi_transmit():
 
 # Define a function to start the loop
 def start_transmission():
-   global running
-   running = True
-   wifi_transmit()
+    global running
+    running = True
+    if SIGNAL_CHOSEN == "Wi-Fi":
+        wifi_transmit()
+    elif SIGNAL_CHOSEN == "FM/AM":
+        clickedSDR()
 
 # Define a function to stop the loop
 def end_transmission():
@@ -137,25 +142,23 @@ def end_transmission():
    wifi_transmit()
 
 
+# sendSDRButton = Button(interface, text="Send to SDR",bg='white', command=lambda:start_transmission())
+# sendSDRButton.pack()
+
+# stopSDRButton = Button(interface, text="STOP sending",bg='white', command=lambda:end_transmission())
+# stopSDRButton.pack()
+
+# if SIGNAL_CHOSEN == "Wi-Fi":
 sendSDRButton = Button(interface, text="Send to SDR",bg='white', command=lambda:start_transmission())
 sendSDRButton.pack()
 
 stopSDRButton = Button(interface, text="STOP sending",bg='white', command=lambda:end_transmission())
 stopSDRButton.pack()
-
-
-#interface.after(1000, wifi_transmit)
-# if SIGNAL_CHOSEN == "Wi-Fi":
-#     sendSDRButton = Button(interface, text="Send to SDR",bg='white', command=start_transmission())
-#     sendSDRButton.pack()
-
-#     sendSDRButton = Button(interface, text="STOP sending",bg='white', command=start_transmission())
-#     sendSDRButton.pack
 # else:
-#     sendSDRButton = Button(interface, text="Send to SDR",bg='white', command=clickedSDR)
+#     sendSDRButton = Button(interface, text="Send to SDR",bg='white', command=lambda:clickedSDR)
 #     sendSDRButton.pack()
 
-#     sendSDRButton = Button(interface, text="STOP sending",bg='white', command=clickedSDR)
+#     sendSDRButton = Button(interface, text="STOP sending",bg='white', command=lambda:clickedSDR)
 #     sendSDRButton.pack()
 
 interface.mainloop()
