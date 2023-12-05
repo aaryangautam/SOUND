@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
-import fmtransmit
+#import fmtransmit
 import wifitransmit
 
 interface = tk.Tk()
@@ -64,6 +64,13 @@ def setHopping():
 def setDelay():
     print("Time Delay selected")
     print(isHopping.get())
+
+def setMessage():
+    global message_entry
+    global message
+    string= message_entry.get()
+    message = string
+
  
 #####
 
@@ -104,9 +111,9 @@ sendFreqButton.pack()
 
 enterMessageButton = Label(interface, text="Choose message to send:",bg=bg_color,fg='white')
 enterMessageButton.pack()
-message = ttk.Entry(interface)
-message.pack()
-sendMessageButton = Button(interface, text="Save Message",bg='white', command = setFrequency)#change the command...
+message_entry = ttk.Entry(interface)
+message_entry.pack()
+sendMessageButton = Button(interface, text="Save Message",bg='white', command = setMessage)#change the command...
 sendMessageButton.pack()
 
 
@@ -119,8 +126,9 @@ running = True
 
 # Define a function to print the text in a loop
 def wifi_transmit():
+    global message
     if running:
-        wifitransmit.wifitransmit()
+        wifitransmit.wifitransmit(message)
         print("sending Wi-Fi right now:::")
         
     interface.after(1000, wifi_transmit)
