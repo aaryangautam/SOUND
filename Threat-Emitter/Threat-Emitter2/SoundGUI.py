@@ -82,9 +82,11 @@ isDelay = tk.BooleanVar()
 #####
 #THE SIGNAL WE WILL BE WORKING WITH
 SIGNAL_CHOSEN = "FM/AM"
-
-def change_signal(signal):
+type = ""
+def change_signal(type_in, signal):
     global SIGNAL_CHOSEN
+    global type
+    type = type_in
     SIGNAL_CHOSEN = signal
     print(SIGNAL_CHOSEN)
     menuButton.config(text=f"Choosen signal: {SIGNAL_CHOSEN}")
@@ -93,10 +95,11 @@ def change_signal(signal):
 menuButton = Menubutton(interface, text = "Choose signal")
 menuButton.menu = Menu(menuButton)
 menuButton['menu']=menuButton.menu
-menuButton.menu.add_command(label='Bluetooth', command=lambda:change_signal("Bluetooth"))
-menuButton.menu.add_command(label='Wi-Fi', command=lambda:change_signal("Wi-Fi"))
-menuButton.menu.add_command(label='FM/AM', command=lambda:change_signal("FM/AM"))
-menuButton.menu.add_command(label='CDMA', command=lambda:change_signal("CDMA"))
+#menuButton.menu.add_command(label='Bluetooth', command=lambda:change_signal("Bluetooth"))
+menuButton.menu.add_command(label='TCP', command=lambda:change_signal("TCP", "Wi-Fi"))
+menuButton.menu.add_command(label='UDP', command=lambda:change_signal("UDP", "Wi-Fi"))
+menuButton.menu.add_command(label='FM/AM', command=lambda:change_signal("", "FM/AM"))
+menuButton.menu.add_command(label='CDMA', command=lambda:change_signal("", "CDMA"))
 
 menuButton.pack()
 
@@ -129,14 +132,15 @@ running = True
 # Define a function to print the text in a loop
 def wifi_transmit():
     global message
+    global type
     if running:
         
         print("sending Wi-Fi right now:::")
-        wifitransmit.wifitransmit(message)
+        wifitransmit.wifitransmit(type, message)
         #wifireceive.wifireceive()
         
         
-    interface.after(1000, wifi_transmit)
+    interface.after(2000, wifi_transmit)
 
 def cdma_transmit():
     return 0
