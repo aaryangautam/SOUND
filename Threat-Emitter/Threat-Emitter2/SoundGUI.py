@@ -3,6 +3,7 @@ from tkinter import ttk
 from tkinter import *
 #import fmtransmit
 import wifitransmit
+#import wifireceive
 
 interface = tk.Tk()
 interface.title("SOUND")
@@ -95,6 +96,7 @@ menuButton['menu']=menuButton.menu
 menuButton.menu.add_command(label='Bluetooth', command=lambda:change_signal("Bluetooth"))
 menuButton.menu.add_command(label='Wi-Fi', command=lambda:change_signal("Wi-Fi"))
 menuButton.menu.add_command(label='FM/AM', command=lambda:change_signal("FM/AM"))
+menuButton.menu.add_command(label='CDMA', command=lambda:change_signal("CDMA"))
 
 menuButton.pack()
 
@@ -128,11 +130,16 @@ running = True
 def wifi_transmit():
     global message
     if running:
-        wifitransmit.wifitransmit(message)
+        
         print("sending Wi-Fi right now:::")
+        wifitransmit.wifitransmit(message)
+        #wifireceive.wifireceive()
+        
         
     interface.after(1000, wifi_transmit)
 
+def cdma_transmit():
+    return 0
 
 # Define a function to start the loop
 def start_transmission():
@@ -142,6 +149,8 @@ def start_transmission():
         wifi_transmit()
     elif SIGNAL_CHOSEN == "FM/AM":
         clickedSDR()
+    elif SIGNAL_CHOSEN == "CDMA":
+        cdma_transmit()
 
 # Define a function to stop the loop
 def end_transmission():
