@@ -128,7 +128,7 @@ running = True
 def wifi_transmit():
     global message
     if running:
-        wifitransmit.wifitransmit(message)
+        wifitransmit.tcpTransmit(message)
         print("sending Wi-Fi right now:::")
         
     interface.after(1000, wifi_transmit)
