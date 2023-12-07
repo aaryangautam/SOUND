@@ -130,11 +130,7 @@ running = True
 def wifi_transmit():
     global message
     if running:
-<<<<<<< HEAD
-        wifitransmit.tcpTransmit(message)
-=======
         
->>>>>>> b2365fbe6447ad56bdebebe5829c6cbe10ddc906
         print("sending Wi-Fi right now:::")
         wifitransmit.wifitransmit(message)
         #wifireceive.wifireceive()
